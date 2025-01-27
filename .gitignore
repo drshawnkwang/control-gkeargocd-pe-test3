@@ -1,0 +1,9 @@
+## Helm ###
+# Chart dependencies
+**/charts/*.tgz
+charts/**/charts
+charts/**/Chart.lock
+
+# temporary stuff
+*.tmp
+*.*~
