@@ -1,0 +1,44 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-applications-pe-tools
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+        - name: argo-cd
+          namespace: argocd
+          upstream-repo: 'https://argoproj.github.io/argo-helm'
+          upstream-chart: 'argo-cd'
+          upstream-vers: '7.7.18'
+          values-repo: 'https://github.com/drshawnkwang/control-gkeargocd-pe-test3.git'
+          values-path: 'app-values/argocd-values.yml'
+          values-vers: 'HEAD'
+          destclstr: 'https://kubernetes.default.svc'
+  template:
+    metadata:
+      name: '{{name}}'
+      namespace: '{{namespace}}'
+    spec:
+      project: default
+      sources:
+        - repoURL: '{{upstream-repo}}'
+          chart: '{{upstream-chart}}'
+          targetRevision: '{{upstream-vers}}'
+          helm:
+            valueFiles:
+            - $values/{{values-path}}
+        - repoURL: '{{values-repo}}'
+          targetRevision: '{{values-vers}}'
+          ref: values
+      destination:
+        server: '{{destclstr}}'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true
