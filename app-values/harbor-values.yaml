@@ -358,7 +358,7 @@ logLevel: debug
 caSecretName: ""
 
 # The secret key used for encryption. Must be a string of 16 chars.
-secretKey: ">|J:_F5,\ZJLks%C"
+secretKey: "Cewg4.AjLp%j7XBp"
 # If using existingSecretSecretKey, the key must be secretKey
 existingSecretSecretKey: ""
 
