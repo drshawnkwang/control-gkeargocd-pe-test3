@@ -4,6 +4,8 @@
 charts/**/charts
 charts/**/Chart.lock
 
+bootstrapfiles
+
 # temporary stuff
 *.tmp
 *.*~
