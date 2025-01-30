@@ -14,7 +14,7 @@ extraObjects:
         argocd.argoproj.io/sync-wave: "-1"
       labels:
         argocd.argoproj.io/instance: external-secrets
-        iam.gke.io/gcp-service-account: eso-902@harbor-dev1.iam.gserviceaccount.com
+        iam.gke.io/gcp-service-account: 'eso-902@harbor-dev1.iam.gserviceaccount.com'
   - |
     ---
     apiVersion: external-secrets.io/v1beta1
