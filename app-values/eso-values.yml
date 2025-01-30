@@ -1,0 +1,43 @@
+---
+## -- Extra Kubernetes objects to deploy with the helm chart
+# Deploys the Vault integration serviceaccount, its secret, and sets its role (Sync)
+# Deploys Bootstrap secret_id, k8svaultprep Job, and ClusterSecretStore (PostSync)
+extraObjects:
+  - |
+    ---
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: eso-gcpsecretmgr-integration
+      namespace: external-secrets
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
+      labels:
+        argocd.argoproj.io/instance: external-secrets
+        iam.gke.io/gcp-service-account: eso-902@harbor-dev1.iam.gserviceaccount.com
+  - |
+    ---
+    apiVersion: external-secrets.io/v1beta1
+    kind: ClusterSecretStore
+    metadata:
+      name: eso-gcp-clstrsecstore
+      annotations:
+        argocd.argoproj.io/sync-wave: "1"
+      labels:
+        argocd.argoproj.io/instance: external-secrets
+    spec:
+      provider:
+        gcpsm:
+          projectID: harbor-dev1
+          auth:
+            workloadIdentity:
+              # name of the cluster Location, region or zone
+              clusterLocation: us-central1-f
+              # name of the GKE cluster
+              clusterName: esnet-gke-cluster
+              # projectID of the cluster (if omitted defaults to spec.provider.gcpsm.projectID)
+              # clusterProjectID: my-cluster-project
+              # reference the sa from above
+              serviceAccountRef:
+                name: eso-gcpsecretmgr-integration
+                namespace: external-secrets

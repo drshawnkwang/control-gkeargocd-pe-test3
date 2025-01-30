@@ -17,6 +17,15 @@ spec:
           values-path: 'app-values/argocd-values.yml'
           values-vers: 'HEAD'
           destclstr: 'https://kubernetes.default.svc'
+        - name: external-secrets
+          namespace: external-secrets
+          upstream-repo: 'https://charts.external-secrets.io'
+          upstream-chart: 'external-secrets'
+          upstream-vers: '0.13.0'
+          values-repo: 'https://github.com/drshawnkwang/control-gkeargocd-pe-test3.git'
+          values-path: 'app-values/eso-values.yml'
+          values-vers: 'HEAD'
+          destclstr: 'https://kubernetes.default.svc'
   template:
     metadata:
       name: '{{name}}'
