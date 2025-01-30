@@ -15,7 +15,7 @@ spec:
       prune: true
       selfHeal: true
   sources:
-    - repoURL: 'https://gitlab.es.net/platform-engineering/argocd-control3.git'
+    - repoURL: 'https://github.com/drshawnkwang/control-gkeargocd-pe-test3.git'
       path: manifests/harbor
       targetRevision: HEAD
     - repoURL: 'https://github.com/drshawnkwang/control-gkeargocd-pe-test3.git'
