@@ -2,7 +2,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: harbor-admin-externalsecret-from-eso-gcpsm
+  name: harbor-gcs-externalsecret-from-eso-gcpsm
   namespace: harbor
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
