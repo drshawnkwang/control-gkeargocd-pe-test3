@@ -191,7 +191,7 @@ persistence:
     # Specify the type of storage: "filesystem", "azure", "gcs", "s3", "swift",
     # "oss" and fill the information needed in the corresponding section. The type
     # must be "filesystem" if you want to use persistent volumes for registry
-    type: filesystem
+    type: gcs
     filesystem:
       rootdirectory: /storage
       #maxthreads: 100
@@ -203,13 +203,13 @@ persistence:
       # To use existing secret, the key must be AZURE_STORAGE_ACCESS_KEY
       existingSecret: ""
     gcs:
-      bucket: bucketname
+      bucket: esnet-bucketz
       # The base64 encoded json file which contains the key
       encodedkey: base64-encoded-json-key-file
-      #rootdirectory: /gcs/object/name/prefix
+      rootdirectory: /harbor2
       #chunksize: "5242880"
       # To use existing secret, the key must be GCS_KEY_DATA
-      existingSecret: ""
+      existingSecret: "harbor-gcpscm-gcs-key-data"
       useWorkloadIdentity: false
     s3:
       # Set an existing secret for S3 accesskey and secretkey

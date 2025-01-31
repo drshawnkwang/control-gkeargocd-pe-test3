@@ -1,0 +1,20 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-admin-externalsecret-from-eso-gcpsm
+  namespace: harbor
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  refreshInterval: "1800s"
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: eso-gcp-clstrsecstore
+  target:
+    name: harbor-gcpscm-gcs-key-data
+    creationPolicy: Owner
+  data:
+    - secretKey: GCS_KEY_DATA
+      remoteRef:
+        key: harbor-gcs-key-data
